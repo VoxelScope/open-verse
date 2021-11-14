@@ -1,0 +1,27 @@
+{
+  "name": "@voxelscope/open-verse",
+  "version": "1.0.0",
+  "description": "VoxelScope Open-Verser Server Instance Module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VoxelScope/open-verse.git"
+  },
+  "keywords": [
+    "VR",
+    "Social",
+    "Network"
+  ],
+  "author": "Eduardo Rodrigues (Voxelscope)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VoxelScope/open-verse/issues"
+  },
+  "homepage": "https://github.com/VoxelScope/open-verse#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
