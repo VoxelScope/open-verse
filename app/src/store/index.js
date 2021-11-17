@@ -1,8 +1,14 @@
 import { createStore } from "vuex";
 
 export default createStore({
-  state: {},
-  getters: {},
+  state: {
+    dev: true
+  },
+  getters: {
+    isDev: (state) => {
+      return state.dev
+    }
+  },
   mutations: {},
   actions: {},
   modules: {},

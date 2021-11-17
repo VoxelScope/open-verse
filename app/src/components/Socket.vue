@@ -26,10 +26,39 @@ export default {
   mounted() {
     this.$nextTick(() => {
       const socket = io("http://localhost:8888/feed", {
+        reconnectionDelayMax: 10000,
         withCredentials: true,
+        auth: { token: "123" },
+        query: { "my-key": "my-value" },
       });
       socket.on("connect", () => {
+        const engine = socket.io.engine;
+        engine.once("upgrade", () => {
+          console.log(engine.transport.name);
+        });
+        // engine.on("packet", ({ type, data }) => {
+        //   // console.log(type);
+        //   // console.log(data);
+        // });
         console.log(socket.id);
+      });
+      socket.on("data", (data) => {
+        console.log(data);
+      });
+      socket.io.on("reconnect", (attempt) => {
+        console.log("reconnecting", attempt);
+      });
+      socket.io.on("reconnect_attempt", (attempt) => {
+        console.log("reconnect_attempt", attempt);
+      });
+      socket.io.on("reconnect_error", (error) => {
+        console.log("reconnect_error", error);
+      });
+      socket.io.on("reconnect_failed", () => {
+        console.log("reconnect_failed");
+      });
+      socket.on("disconnect", () => {
+        console.log("disconnected", socket.id);
       });
       console.log("mounted Socket");
     });

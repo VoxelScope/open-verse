@@ -1,3 +1,4 @@
+const redis = require("redis");
 const express = require('express');
 const app = express();
 app.use(express.urlencoded({ extended: true }))
@@ -16,21 +17,22 @@ io.attach(8888, {
     cookie: false,
     session: true
 })
-const network = io.of("/feed")
-var redis = require("redis");
-
-network.on("connection", (socket) => {
-    console.log(`Receiver ${socket.id} connected..`) // Logging when user is connected
+const namespace = io.of("/feed");
+var x = 0;
+namespace.on("connection", (socket) => {
+    console.log(`Receiver ${socket.id} connected..`);
+    setInterval(() => {
+        x = x + 0.01
+        socket.emit([{ x: 100 + x, y: 200, z: 101, i: 1 }, { x: 100, y: 200, z: 101 + x, i: 2 }])
+    }, 1000 / 24)
     socket.on("disconnecting", (reason) => {
         console.log("Socket " + socket.id + " disconnected. Reason=", reason)
     });
 });
 
-
 app.get('/', function (req, res) {
     res.send('Hello World!');
 });
-
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log('Open Verse by VoxelScope');

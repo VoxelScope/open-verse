@@ -8,6 +8,6 @@
     "parser": "babel-eslint"
   },
   "rules": {
-    "noInlineConfig": true
+    " eslint-disable-next-line": 0
   }
 }
