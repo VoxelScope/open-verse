@@ -20,6 +20,7 @@ io.attach(8888, {
 const namespace = io.of("/feed");
 var x = 0;
 namespace.on("connection", (socket) => {
+
     console.log(`Receiver ${socket.id} connected..`);
     setInterval(() => {
         x = x + 0.01
